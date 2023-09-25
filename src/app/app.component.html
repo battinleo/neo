@@ -1,1 +1,9 @@
-<app-parsed-api-data></app-parsed-api-data>
+<div *ngIf="!isLoading; else spinner">
+  <app-neo-list [objects]="objects"></app-neo-list>
+</div>
+
+<ng-template #spinner>
+  <div class="page-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

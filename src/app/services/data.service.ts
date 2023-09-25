@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, filter, map } from 'rxjs';
-import { NearEarthObject } from '../raw-api-data/model/NearEarthObject';
+import { NearEarthObject } from '../model/NearEarthObject';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_KEY, API_ROOT, ApiObject } from '../data/api';
 
