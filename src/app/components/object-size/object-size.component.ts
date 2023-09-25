@@ -29,8 +29,6 @@ export class ObjectSizeComponent {
 
     const { objectHeight, objectWidth, eiffelTowerHeight } = this.computeCanvasDimensions();
 
-    console.log(eiffelTowerHeight);
-
     eiffelTowerImg.onload = () => {
       const width = eiffelTowerHeight / eiffelTowerImg.height * eiffelTowerImg.width;
       this.context.ellipse(

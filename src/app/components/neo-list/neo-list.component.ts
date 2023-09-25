@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { NearEarthObject } from 'src/app/model/NearEarthObject';
 
 @Component({
@@ -8,4 +8,5 @@ import { NearEarthObject } from 'src/app/model/NearEarthObject';
 })
 export class NeoListComponent {
   @Input({required: true}) objects!: NearEarthObject[];
+  public cols = window.innerWidth > 1200 ? 3 : 1;
 }

@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="550">
+<mat-grid-list [cols]="cols" rowHeight="550">
   <mat-grid-tile *ngFor="let object of objects">
     <app-neo-item [object]="object"></app-neo-item>
   </mat-grid-tile>

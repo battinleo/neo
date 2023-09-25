@@ -1,4 +1,4 @@
-// TODO: Responsive design
+// TODO: Handle responsiveness more gracefully (remove hardcoded breakpoints...)
 
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';

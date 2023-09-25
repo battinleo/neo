@@ -8,4 +8,5 @@ import { NearEarthObject } from 'src/app/model/NearEarthObject';
 })
 export class NeoItemComponent {
   @Input({required: true}) object!: NearEarthObject;
+  class = window.innerWidth > 1200 ? 'third' : '';
 }
