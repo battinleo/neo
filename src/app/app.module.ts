@@ -4,12 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RawApiDataComponent } from './raw-api-data/raw-api-data.component';
+import { ParsedApiDataComponent } from './raw-api-data/parsed-api-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RawApiDataComponent
+    ParsedApiDataComponent
   ],
   imports: [
     BrowserModule,
