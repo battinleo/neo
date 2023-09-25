@@ -1,38 +1,63 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { API_KEY, API_ROOT, ApiObject } from '../data/api';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription, tap } from 'rxjs';
 import { NearEarthObject } from './model/NearEarthObject';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-parsed-api-data',
   template: `
-    {{ objects$ | async | json }}
-  `
-})
-export class ParsedApiDataComponent implements OnInit {
-  public data$!: Observable<any>;
-  public objects$!: Observable<NearEarthObject[]>;
+    <div *ngIf="!isLoading; else spinner">
+      <mat-grid-list cols="3" rowHeight="150">
+        <mat-grid-tile *ngFor="let object of objects">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{ object.name }}</mat-card-title>
+              <mat-card-subtitle>Subtitle</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Card content</p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
 
-  constructor(private http: HttpClient) {}
+    <ng-template #spinner>
+      <div class="page-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  `,
+  styles: [
+    `.page-center {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }`,
+    `mat-card {
+      width: 28vw
+    }`
+  ]
+})
+export class ParsedApiDataComponent {
+  private objects$!: Observable<NearEarthObject[]>;
+  private objectsSubscription!: Subscription;
+
+  public objects!: NearEarthObject[];
+  public isLoading = true;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    const today = new Date();
-    const month = today.getMonth().toString().padStart(2, '0');
-    const date = today.getDate().toString().padStart(2, '0');
-    const todayString = `${today.getFullYear()}-${month}-${date}`;
+    this.objects$ = this.dataService.objects$.pipe();
+    this.objectsSubscription = this.objects$.subscribe(data => {
+      this.objects = data;
+      this.isLoading = false;
+    });
+  }
 
-    let params = new HttpParams();
-    params = params.set('start_date', todayString);
-    params = params.set('end_date', todayString);
-    params = params.set('api_key', API_KEY);
-
-    this.data$ = this.http.get(API_ROOT, { params });
-    this.objects$ = this.data$.pipe(
-      map((obj: any) => {
-        return obj['near_earth_objects'][todayString].map((apiObj: ApiObject) => NearEarthObject.fromApiObject(apiObj));
-      })
-    )
+  ngOnDestroy() {
+    this.objectsSubscription.unsubscribe();
   }
 }
