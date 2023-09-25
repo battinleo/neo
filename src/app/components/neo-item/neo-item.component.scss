@@ -1,3 +1,42 @@
+@use "sass:map";
+
+@import '../../../styles.scss';
+
 mat-card {
-    width: 25vw;
+  width: 25vw;
+}
+
+mat-card-header {
+    background-color: map.get($primary, 400);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    color: white;
+    padding-bottom: 1rem;
+}
+
+mat-card-subtitle {
+    color: map-get($primary, 50);
+}
+
+mat-card-content {
+    padding-top: 1rem;
+}
+
+mat-card-content p {
+    display: flex;
+    align-items: center;
+}
+
+mat-card-content p span {
+    display: inline-block;
+    flex-grow: 1;
+    text-align: right;
+}
+
+.distance {
+    text-align: center;
+}
+
+app-object-size {
+    width: 100%;
 }

@@ -1,3 +1,5 @@
+<h1>Liste des Objets proches de la Terre ({{ today | date:'fullDate':undefined:'fr' }})</h1>
+
 <div *ngIf="!isLoading; else spinner">
   <app-neo-list [objects]="objects"></app-neo-list>
 </div>

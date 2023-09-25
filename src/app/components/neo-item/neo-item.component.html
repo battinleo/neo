@@ -1,9 +1,35 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{ object.name }}</mat-card-title>
-    <mat-card-subtitle>Subtitle</mat-card-subtitle>
+    <mat-card-subtitle>{{ object.id }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>Card content</p>
+    <p>
+      <button mat-flat-button color="accent">Magnitude</button> 
+      <span>{{ object.magnitude }}</span>
+    </p>
+    <p>
+      <button mat-flat-button color="accent">Dimensions</button> 
+      <span>
+        {{ object.shape.minorAxisMeters | number:'0.2-2' }}m
+        x {{ object.shape.majorAxisMeters | number:'0.2-2' }}m
+      </span>
+    </p>
+    <p>
+      <app-object-size [dimensions]="object.shape" [height]="100"></app-object-size>
+    </p>
+    <p>
+      <button mat-flat-button color="accent">Danger potentiel</button> 
+      <span>{{ object.hazardous ? 'Oui' : 'Non' }}</span>
+    </p>
+    <p>
+      <button mat-flat-button color="accent">Vitesse relative</button> 
+      <span>{{ object.relativeVelocityKmPH | number:'0.0-0' }} km/h</span>
+    </p>
+    <p class="distance">
+      Pourrait atteindre la terre en 
+      {{ object.missDistanceKm / object.relativeVelocityKmPH / 24 | number:'0.0-0' }} 
+      jours s'il sortait de son orbite.
+    </p>
   </mat-card-content>
 </mat-card>

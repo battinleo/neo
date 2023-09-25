@@ -1,6 +1,6 @@
 import { ApiObject } from "src/app/data/api";
 
-type Oval = {
+export type Oval = {
     minorAxisMeters: number;
     majorAxisMeters: number;
 }

@@ -1,3 +1,5 @@
+// TODO: Responsive design
+
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NearEarthObject } from './model/NearEarthObject';
@@ -12,6 +14,7 @@ export class AppComponent {
   private objectsSubscription!: Subscription;
   public objects!: NearEarthObject[];
   public isLoading = true;
+  public today = new Date();
 
   constructor(private dataService: DataService) { }
 

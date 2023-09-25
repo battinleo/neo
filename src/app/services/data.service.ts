@@ -29,7 +29,8 @@ export class DataService {
     this.data$ = this.http.get(API_ROOT, { params });
     this.objects$ = this.data$.pipe(
       map((obj: any) => {
-        return obj['near_earth_objects'][todayString].map((apiObj: ApiObject) => NearEarthObject.fromApiObject(apiObj));
+        return obj['near_earth_objects'][todayString]
+          .map((apiObj: ApiObject) => NearEarthObject.fromApiObject(apiObj));
       })
     );
   }
